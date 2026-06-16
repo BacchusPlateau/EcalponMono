@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace TileResearch
+namespace Ecalpon
 {
     internal class Program
     {
         [STAThread]
         static void Main(string[] args)
         {
-            using (Game1 game = new Game1())
+            using (TheGame game = new TheGame())
             {
                 game.Run();
             }
