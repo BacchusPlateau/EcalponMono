@@ -15,6 +15,7 @@ namespace Ecalpon.Combat
 
     public class Combatant
     {
+
         // --- Identity ---
         public string Name { get; set; }
         public CombatantType Type { get; set; }
@@ -23,7 +24,8 @@ namespace Ecalpon.Combat
         public int GridRow { get; set; }
         public int GridCol { get; set; }
 
-        // --- Core AD&D stats ---
+        public int MaxAttacks { get; set; }
+        public int AttacksRemainingThisTurn { get; set;  }
         public int HitPoints { get; set; }
         public int MaxHitPoints { get; set; }
         public int ArmorClass { get; set; }
@@ -39,7 +41,14 @@ namespace Ecalpon.Combat
 
         // --- Turn management ---
         public int Initiative { get; set; }
-        public bool HasActedThisTurn { get; set; }
+        public bool HasActedThisTurn 
+        { 
+            get
+            {
+                return AttacksRemainingThisTurn <= 0;
+            }
+        }
+
         public int MovesRemaining { get; set; }
         public int MaxMoves { get; set; }
 
@@ -51,6 +60,17 @@ namespace Ecalpon.Combat
 
         // --- Experience reward when killed ---
         public int ExperienceValue { get; set; }
+
+        public Combatant()
+        {
+            MaxAttacks = 1;
+        }
+
+        public void StartTurn()
+        {
+            AttacksRemainingThisTurn = MaxAttacks;
+            MovesRemaining = MaxMoves;
+        }
     }
 
 }

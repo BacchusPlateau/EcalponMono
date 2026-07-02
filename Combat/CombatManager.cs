@@ -87,8 +87,7 @@ namespace Ecalpon.Combat
             if (current == null)
                 return;
 
-            current.HasActedThisTurn = false;
-            current.MovesRemaining = current.MaxMoves;
+            current.StartTurn();
 
             if (current.IsPlayerControlled)
                 AddMessage(current.Name + "'s turn.");

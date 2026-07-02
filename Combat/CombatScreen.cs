@@ -78,11 +78,31 @@ namespace Ecalpon.Combat
 
             if (_manager.CurrentState == CombatState.EnemyTurn)
                 ResolveEnemyTurn();
+
+            if (_manager.CurrentState == CombatState.SelectingTarget)
+                HandlePlayerTargeting();
         }
 
-        // =====================================================
-        // PLAYER INPUT
-        // =====================================================
+        private void HandlePlayerTargeting()
+        {
+            if (WasKeyJustPressed(Keys.Up) || WasKeyJustPressed(Keys.Right))
+            {
+               //cycle DOWN in list of enemies
+                return;
+            }
+
+            if (WasKeyJustPressed(Keys.Down) || WasKeyJustPressed(Keys.Left))
+            {
+                //cycle UP in list of enemies
+                return;
+            }
+
+            if(WasKeyJustPressed(Keys.Enter))
+            {
+                //target acquired, determine is valid
+                return;
+            }
+        }
 
         private void HandlePlayerInput()
         {
@@ -104,7 +124,7 @@ namespace Ecalpon.Combat
                 return;
             }
 
-            if (WasKeyJustPressed(Keys.Enter))
+            if (WasKeyJustPressed(Keys.Space))
                 _manager.EndCurrentTurn();
         }
 
@@ -277,7 +297,7 @@ namespace Ecalpon.Combat
                 _spriteBatch.DrawString(_font, "[P] Use Power",
                     new Vector2(menuX + 8, menuY + 74), Color.White);
 
-                _spriteBatch.DrawString(_font, "[Enter] End Turn",
+                _spriteBatch.DrawString(_font, "[Space] End Turn",
                     new Vector2(menuX + 8, menuY + 96), Color.White);
             }
             else
